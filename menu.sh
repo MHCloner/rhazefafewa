@@ -465,7 +465,7 @@ check_operating_system() {
   elif [ -s /etc/redhat-release ]; then
     SYS="$(grep . /etc/redhat-release)"
   elif [ -s /etc/issue ]; then
-    SYS="$(grep . /etc/issue | cut -d '\\' -f1 | sed '/^[ ]*$/d')"
+    SYS="$(grep . /etc/issue | cut -d '\'' -f1 | sed '/^[ ]*$/d')"
   fi
 
   # 自定义 Alpine 系统若干函数
