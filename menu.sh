@@ -18,14 +18,14 @@ E[0]="\n Language:\n 1. English (default) \n 2. 简体中文\n"
 C[0]="${E[0]}"
 E[1]="Add a check to see if udp is allowed, if all endpoints of WARP are unreachable, the script will abort."
 C[1]="增加是否允许 udp 的检测，如果 WARP 的所有 endpoint 均不能连通，脚本将中止"
-E[2]="The script must be run as root, you can enter sudo -i and then download and run again. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[2]="必须以root方式运行脚本，可以输入 sudo -i 后重新下载运行，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
-E[3]="The TUN module is not loaded. You should turn it on in the control panel. Ask the supplier for more help. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[3]="没有加载 TUN 模块，请在管理后台开启或联系供应商了解如何开启，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
-E[4]="The WARP server cannot be connected. It may be a China Mainland VPS. You can manually ping 162.159.193.10 or ping -6 2606:4700:d0::a29f:c001.You can run the script again if the connect is successful. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[4]="与 WARP 的服务器不能连接,可能是大陆 VPS，可手动 ping 162.159.193.10 或 ping -6 2606:4700:d0::a29f:c001，如能连通可再次运行脚本，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
-E[5]="The script supports Debian, Ubuntu, CentOS, Fedora, Arch or Alpine systems only. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[5]="本脚本只支持 Debian、Ubuntu、CentOS、Fedora、Arch 或 Alpine 系统,问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[2]="The script must be run as root, you can enter sudo -i and then download and run again. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[2]="必须以root方式运行脚本，可以输入 sudo -i 后重新下载运行，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
+E[3]="The TUN module is not loaded. You should turn it on in the control panel. Ask the supplier for more help. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[3]="没有加载 TUN 模块，请在管理后台开启或联系供应商了解如何开启，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
+E[4]="The WARP server cannot be connected. It may be a China Mainland VPS. You can manually ping 162.159.193.10 or ping -6 2606:4700:d0::a29f:c001.You can run the script again if the connect is successful. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[4]="与 WARP 的服务器不能连接,可能是大陆 VPS，可手动 ping 162.159.193.10 或 ping -6 2606:4700:d0::a29f:c001，如能连通可再次运行脚本，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
+E[5]="The script supports Debian, Ubuntu, CentOS, Fedora, Arch or Alpine systems only. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[5]="本脚本只支持 Debian、Ubuntu、CentOS、Fedora、Arch 或 Alpine 系统,问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[6]="warp h (help)\n warp n (Get the WARP IP)\n warp o (Turn off WARP temporarily)\n warp u (Turn off and uninstall WARP interface and Socks5 Linux Client)\n warp b (Upgrade kernel, turn on BBR, change Linux system)\n warp a (Change account to Free, WARP+ or Teams)\n warp p (Getting WARP+ quota by scripts)\n warp v (Sync the latest version)\n warp r (Connect/Disconnect WARP Linux Client)\n warp 4/6 (Add WARP IPv4/IPv6 interface)\n warp d (Add WARP dualstack interface IPv4 + IPv6)\n warp c (Install WARP Linux Client and set to proxy mode)\n warp l (Install WARP Linux Client and set to WARP mode)\n warp i (Change the WARP IP to support Netflix)\n warp e (Install Iptables + dnsmasq + ipset solution)\n warp w (Install WireProxy solution)\n warp y (Connect/Disconnect WireProxy socks5)\n warp k (Switch between kernel and wireguard-go-reserved)\n warp g (Switch between warp global and non-global)\n warp s 4/6/d (Set stack proiority: IPv4 / IPv6 / VPS default)\n"
 C[6]="warp h (帮助菜单）\n warp n (获取 WARP IP)\n warp o (临时warp开关)\n warp u (卸载 WARP 网络接口和 Socks5 Client)\n warp b (升级内核、开启BBR及DD)\n warp a (更换账户为 Free，WARP+ 或 Teams)\n warp p (刷WARP+流量)\n warp v (同步脚本至最新版本)\n warp r (WARP Linux Client 开关)\n warp 4/6 (WARP IPv4/IPv6 单栈)\n warp d (WARP 双栈)\n warp c (安装 WARP Linux Client，开启 Socks5 代理模式)\n warp l (安装 WARP Linux Client，开启 WARP 模式)\n warp i (更换支持 Netflix 的IP)\n warp e (安装 Iptables + dnsmasq + ipset 解决方案)\n warp w (安装 WireProxy 解决方案)\n warp y (WireProxy socks5 开关)\n warp k (切换 wireguard 内核 / wireguard-go-reserved)\n warp g (切换 warp 全局 / 非全局)\n warp s 4/6/d (优先级: IPv4 / IPv6 / VPS default)\n"
 E[7]="Install dependence-list:"
@@ -40,8 +40,8 @@ E[11]="Maximum \${j} attempts to get WARP IP..."
 C[11]="后台获取 WARP IP 中,最大尝试\${j}次……"
 E[12]="Try \${i}"
 C[12]="第\${i}次尝试"
-E[13]="There have been more than \${j} failures. The script is aborted. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[13]="失败已超过\${j}次，脚本中止，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[13]="There have been more than \${j} failures. The script is aborted. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[13]="失败已超过\${j}次，脚本中止，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[14]="Got the WARP\$TYPE IP successfully"
 C[14]="已成功获取 WARP\$TYPE 网络"
 E[15]="WARP is turned off. It could be turned on again by [warp o]"
@@ -66,8 +66,8 @@ E[24]="Client is on"
 C[24]="Client 已开启"
 E[25]="Device name"
 C[25]="设备名"
-E[26]="Curren operating system is \$SYS.\\\n The system lower than \$SYSTEM \${MAJOR[int]} is not supported. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[26]="当前操作是 \$SYS\\\n 不支持 \$SYSTEM \${MAJOR[int]} 以下系统,问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[26]="Curren operating system is \$SYS.\\\n The system lower than \$SYSTEM \${MAJOR[int]} is not supported. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[26]="当前操作是 \$SYS\\\n 不支持 \$SYSTEM \${MAJOR[int]} 以下系统,问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[27]="Local Socks5"
 C[27]="本地 Socks5"
 E[28]="If there is a WARP+ License, please enter it, otherwise press Enter to continue:"
@@ -82,8 +82,8 @@ E[32]="Step 1/3: Install dependencies..."
 C[32]="进度 1/3: 安装系统依赖……"
 E[33]="Step 2/3: WARP is ready"
 C[33]="进度 2/3: 已安装 WARP"
-E[34]="Failed to change port. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[34]="更换端口不成功，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[34]="Failed to change port. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[34]="更换端口不成功，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[35]="Update WARP+ account..."
 C[35]="升级 WARP+ 账户中……"
 E[36]="The upgrade failed, License: \$LICENSE has been activated on more than 5 devices. It script will remain the same account or be switched to a free account."
@@ -102,8 +102,8 @@ E[42]="The upgrade failed, License: \$LICENSE could not update to WARP+. The scr
 C[42]="升级失败，License: \$LICENSE 不能升级为 WARP+，将保持原账户或者转为免费账户。"
 E[43]="Run again with warp [option] [lisence], such as"
 C[43]="再次运行用 warp [option] [lisence]，如"
-E[44]="WARP installation failed. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[44]="WARP 安装失败，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[44]="WARP installation failed. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[44]="WARP 安装失败，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[45]="WARP interface, Linux Client and Wireproxy have been completely deleted!"
 C[45]="WARP 网络接口、 Linux Client 和 Wireproxy 已彻底删除!"
 E[46]="Not cleaned up, please reboot and try again."
@@ -144,8 +144,8 @@ E[63]="WARP+ quota"
 C[63]="剩余流量"
 E[64]="Successfully synchronized the latest version"
 C[64]="成功！已同步最新脚本，版本号"
-E[65]="Upgrade failed. Feedback:[https://github.com/fscarmen/warp-sh/issues]"
-C[65]="升级失败，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[65]="Upgrade failed. Feedback:[https://github.com/MHCloner/rhazefafewa/issues]"
+C[65]="升级失败，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[66]="Add WARP IPv4 interface to \${NATIVE[n]} VPS \(bash menu.sh 4\)"
 C[66]="为 \${NATIVE[n]} 添加 WARP IPv4 网络接口 \(bash menu.sh 4\)"
 E[67]="Add WARP IPv6 interface to \${NATIVE[n]} VPS \(bash menu.sh 6\)"
@@ -188,8 +188,8 @@ E[85]="Client was installed.\n connect/disconnect by [warp r].\n uninstall by [w
 C[85]="Linux Client 已安装\n 连接/断开: warp r\n 卸载: warp u"
 E[86]="Client is working. Socks5 proxy listening on: \$(ss -nltp | grep -E 'warp|wireproxy' | awk '{print \$4}')"
 C[86]="Linux Client 正常运行中。 Socks5 代理监听:\$(ss -nltp | grep -E 'warp|wireproxy' | awk '{print \$4}')"
-E[87]="Fail to establish Socks5 proxy. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[87]="创建 Socks5 代理失败，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[87]="Fail to establish Socks5 proxy. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[87]="创建 Socks5 代理失败，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[88]="Connect the client (warp r)"
 C[88]="连接 Client (warp r)"
 E[89]="Disconnect the client (warp r)"
@@ -216,8 +216,8 @@ E[99]="WireProxy is connected"
 C[99]="WireProxy 已连接"
 E[100]="License should be 26 characters, please re-enter WARP+ License. Otherwise press Enter to continue. \(\${i} times remaining\): "
 C[100]="License 应为26位字符,请重新输入 WARP+ License \(剩余\${i}次\): "
-E[101]="Client support amd64 only. Curren architecture \$ARCHITECTURE. Official Support List: [https://pkg.cloudflareclient.com/packages/cloudflare-warp]. The script is aborted. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[101]="Client 只支持 amd64 架构，当前架构 \$ARCHITECTURE，官方支持列表: [https://pkg.cloudflareclient.com/packages/cloudflare-warp]。脚本中止，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[101]="Client support amd64 only. Curren architecture \$ARCHITECTURE. Official Support List: [https://pkg.cloudflareclient.com/packages/cloudflare-warp]. The script is aborted. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[101]="Client 只支持 amd64 架构，当前架构 \$ARCHITECTURE，官方支持列表: [https://pkg.cloudflareclient.com/packages/cloudflare-warp]。脚本中止，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[102]="Please customize the WARP+ device name \(Default is \$(hostname)\):"
 C[102]="请自定义 WARP+ 设备名 \(默认为 \$(hostname)\):"
 E[103]="Port \$PORT is in use. Please input another Port\(\${i} times remaining\):"
@@ -232,10 +232,10 @@ E[107]="Failed registration, using a preset free account."
 C[107]="注册失败，使用预设的免费账户"
 E[108]="\n 1. WARP Linux Client IP\n 2. WARP WARP IP ( Only IPv6 can be brushed when WARP and Client exist at the same time )\n"
 C[108]="\n 1. WARP Linux Client IP\n 2. WARP WARP IP ( WARP 和 Client 并存时只能刷 IPv6)\n"
-E[109]="Socks5 Proxy Client is working now. WARP IPv4 and dualstack interface could not be switch to. The script is aborted. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[109]="Socks5 代理正在运行中，不能转为 WARP IPv4 或者双栈网络接口，脚本中止，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
-E[110]="Socks5 Proxy Client is working now. WARP IPv4 and dualstack interface could not be installed. The script is aborted. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[110]="Socks5 代理正在运行中，WARP IPv4 或者双栈网络接口不能安装，脚本中止，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[109]="Socks5 Proxy Client is working now. WARP IPv4 and dualstack interface could not be switch to. The script is aborted. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[109]="Socks5 代理正在运行中，不能转为 WARP IPv4 或者双栈网络接口，脚本中止，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
+E[110]="Socks5 Proxy Client is working now. WARP IPv4 and dualstack interface could not be installed. The script is aborted. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[110]="Socks5 代理正在运行中，WARP IPv4 或者双栈网络接口不能安装，脚本中止，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[111]="Port must be 1000-65535. Please re-input\(\${i} times remaining\):"
 C[111]="端口必须为 1000-65535，请重新输入\(剩余\${i}次\):"
 E[112]="Client is not installed."
@@ -282,8 +282,8 @@ E[132]="Is there a WARP+ or Teams account?\n 1. Use free account (default)\n 2. 
 C[132]="如有 WARP+ 或 Teams 账户请选择\n 1. 使用免费账户 (默认)\n 2. WARP+\n 3. Teams"
 E[133]="Device name: \$(grep -s 'Device name' /etc/wireguard/info.log | awk '{ print \$NF }')\\\n Quota: \$QUOTA"
 C[133]="设备名: \$(grep -s 'Device name' /etc/wireguard/info.log | awk '{ print \$NF }')\\\n 剩余流量: \$QUOTA"
-E[134]="Curren architecture \$(uname -m) is not supported. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[134]="当前架构 \$(uname -m) 暂不支持,问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[134]="Curren architecture \$(uname -m) is not supported. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[134]="当前架构 \$(uname -m) 暂不支持,问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[135]="( match √ )"
 C[135]="( 符合 √ )"
 E[136]="( mismatch X )"
@@ -294,8 +294,8 @@ E[138]="Install iptable + dnsmasq + ipset. Let WARP only take over the streaming
 C[138]="安装 iptable + dnsmasq + ipset，让 WARP IPv4 only 接管流媒体流量 (不适用于 IPv6 only VPS) (bash menu.sh e)"
 E[139]="Through Iptable + dnsmasq + ipset, minimize the realization of media unblocking such as chatGPT, Netflix, WARP IPv4 only takes over the streaming media traffic,adapted from the mature works of [Anemone],[https://github.com/acacia233/Project-WARP-Unlock]"
 C[139]="通过 Iptable + dnsmasq + ipset，最小化实现 chatGPT，Netflix 等媒体解锁，WARP IPv4 只接管流媒体流量，改编自 [Anemone] 的成熟作品，地址[https://github.com/acacia233/Project-WARP-Unlock]，请熟知"
-E[140]="Socks5 Proxy Client on IPv4 VPS is working now. WARP IPv6 interface could not be installed. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[140]="IPv4 only VPS，并且 Socks5 代理正在运行中，不能安装 WARP IPv6 网络接口，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[140]="Socks5 Proxy Client on IPv4 VPS is working now. WARP IPv6 interface could not be installed. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[140]="IPv4 only VPS，并且 Socks5 代理正在运行中，不能安装 WARP IPv6 网络接口，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[141]="Switch \${WARP_BEFORE[m]} to \${WARP_AFTER1[m]} \${SHORTCUT1[m]}"
 C[141]="\${WARP_BEFORE[m]} 转为 \${WARP_AFTER1[m]} \${SHORTCUT1[m]}"
 E[142]="Switch \${WARP_BEFORE[m]} to \${WARP_AFTER2[m]} \${SHORTCUT2[m]}"
@@ -304,8 +304,8 @@ E[143]="Change Client or WireProxy port"
 C[143]="更改 Client 或 WireProxy 端口"
 E[144]="Install WARP IPv6 interface"
 C[144]="安装 WARP IPv6 网络接口"
-E[145]="Client is only supported on CentOS 8 and above. Official Support List: [https://pkg.cloudflareclient.com]. The script is aborted. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[145]="Client 只支持 CentOS 8 或以上系统，官方支持列表: [https://pkg.cloudflareclient.com]。脚本中止，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[145]="Client is only supported on CentOS 8 and above. Official Support List: [https://pkg.cloudflareclient.com]. The script is aborted. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[145]="Client 只支持 CentOS 8 或以上系统，官方支持列表: [https://pkg.cloudflareclient.com]。脚本中止，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[146]="Cannot switch to the same form as the current one."
 C[146]="不能切换为当前一样的形态"
 E[147]="Not available for IPv6 only VPS"
@@ -358,8 +358,8 @@ E[170]="Confirm all uninstallation please press [y], other keys do not uninstall
 C[170]="确认全部卸载请按 [y]，其他键默认不卸载:"
 E[171]="Uninstall dependencies were complete."
 C[171]="依赖卸载成功"
-E[172]="No suitable solution was found for modifying the warp configuration file warp.conf and the script aborted. When you see this message, please send feedback on the bug to:[https://github.com/fscarmen/warp-sh/issues]"
-C[172]="没有找到适合的方案用于修改 warp 配置文件 warp.conf，脚本中止。当你看到此信息，请把该 bug 反馈至:[https://github.com/fscarmen/warp-sh/issues]"
+E[172]="No suitable solution was found for modifying the warp configuration file warp.conf and the script aborted. When you see this message, please send feedback on the bug to:[https://github.com/MHCloner/rhazefafewa/issues]"
+C[172]="没有找到适合的方案用于修改 warp 配置文件 warp.conf，脚本中止。当你看到此信息，请把该 bug 反馈至:[https://github.com/MHCloner/rhazefafewa/issues]"
 E[173]="Current account type is: WARP \$ACCOUNT_TYPE\\\n \$PLUS_QUOTA\\\n \$CHANGE_TYPE"
 C[173]="当前账户类型是: WARP \$ACCOUNT_TYPE\\\n \$PLUS_QUOTA\\\n \$CHANGE_TYPE"
 E[174]="1. Continue using the free account without changing.\n 2. Change to WARP+ account.\n 3. Change to Teams account."
@@ -390,8 +390,8 @@ E[186]="Working mode: \$GLOBAL_OR_NOT"
 C[186]="工作模式: \$GLOBAL_OR_NOT"
 E[187]="Failed to change to \$ACCOUNT_CHANGE_FAILED account, automatically switch back to the original account."
 C[187]="更换到 \$ACCOUNT_CHANGE_FAILED 账户失败，自动切换回原来的账户"
-E[188]="All endpoints of WARP cannot be connected. Ask the supplier for more help. Feedback: [https://github.com/fscarmen/warp-sh/issues]"
-C[188]="WARP 的所有的 endpoint 均不能连通，有可能 UDP 被限制了，可联系供应商了解如何开启，问题反馈:[https://github.com/fscarmen/warp-sh/issues]"
+E[188]="All endpoints of WARP cannot be connected. Ask the supplier for more help. Feedback: [https://github.com/MHCloner/rhazefafewa/issues]"
+C[188]="WARP 的所有的 endpoint 均不能连通，有可能 UDP 被限制了，可联系供应商了解如何开启，问题反馈:[https://github.com/MHCloner/rhazefafewa/issues]"
 
 # 自定义字体彩色，read 函数
 warning() { echo -e "\033[31m\033[01m$*\033[0m"; }  # 红色
@@ -399,8 +399,7 @@ error() { echo -e "\033[31m\033[01m$*\033[0m" && exit 1; }  # 红色
 info() { echo -e "\033[32m\033[01m$*\033[0m"; }   # 绿色
 hint() { echo -e "\033[33m\033[01m$*\033[0m"; }   # 黄色
 reading() { read -rp "$(info "$1")" "$2"; }
-text() { grep -q '\$' <<< "${E[$*]}" && eval echo "\$(eval echo \"\${${L}[$*]}\")" || eval echo "\${${L}[$*]}"; }
-
+text() { grep -q '\$' <<< "${E[$*]}" && eval echo "\$(eval echo "\${${L}[$*]}")" || eval echo "\${${L}[$*]}"; }
 
 # 自定义谷歌翻译函数
 translate() {
@@ -445,10 +444,7 @@ check_root_virt() {
 
 # 随机使用 cdn 网址，以负载均衡
 check_cdn() {
-  RANDOM_CDN=($(shuf -e "${CDN_URL[@]}"))
-  for CDN in "${RANDOM_CDN[@]}"; do
-    wget -T2 -qO- https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | grep -q '#!/usr/bin/env' && break || unset CDN
-  done
+  wget -T2 -qO- https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | grep -q '#!/usr/bin/env'
 }
 
 # 多方式判断操作系统，试到有值为止。只支持 Debian 10/11、Ubuntu 18.04/20.04 或 CentOS 7/8 ,如非上述操作系统，退出脚本
@@ -465,7 +461,7 @@ check_operating_system() {
   elif [ -s /etc/redhat-release ]; then
     SYS="$(grep . /etc/redhat-release)"
   elif [ -s /etc/issue ]; then
-    SYS="$(grep . /etc/issue | cut -d '\'' -f1 | sed '/^[ ]*$/d')"
+    SYS="$(grep . /etc/issue | cut -d '\' -f1 | sed '/^[ ]*$/d')"
   fi
 
   # 自定义 Alpine 系统若干函数
@@ -520,7 +516,7 @@ check_dependencies() {
 cancel_account(){
   local FILE=$1
   if [ -s "$FILE" ]; then
-    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' "$FILE" || bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --cancle --file "$FILE" >/dev/null 2>&1
+    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' $FILE || bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --cancle --file $FILE >/dev/null 2>&1
   fi
 }
 
@@ -738,7 +734,7 @@ plus() {
       input
       [ $(type -p git) ] || ${PACKAGE_INSTALL[int]} git 2>/dev/null
       [ $(type -p python3) ] || ${PACKAGE_INSTALL[int]} python3 2>/dev/null
-      [ -d ~/warp-plus-cloudflare ] || git clone https://github.com/aliilapro/warp-plus-cloudflare.git
+      [ -d ~/warp-plus-cloudflare ] || git clone https://${CDN}github.com/aliilapro/warp-plus-cloudflare.git
       echo "$ID" | python3 ~/warp-plus-cloudflare/wp-plus.py
       ;;
     2 )
@@ -751,7 +747,7 @@ plus() {
       input
       reading " $(text 57) " MISSION
       MISSION=${MISSION//[^0-9]/}
-      bash <(wget --no-check-certificate -qO- -T8 https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp-up.sh) --disclaimer --id $ID --iterations $MISSION
+      bash <(wget --no-check-certificate -qO- -T8 https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp_up.sh) --disclaimer --id $ID --iterations $MISSION
       ;;
     0 )
       [ "$OPTION" != p ] && menu || exit
@@ -1833,7 +1829,7 @@ best_mtu() {
 
 # 寻找最佳 Endpoint，根据 v4 / v6 情况下载 endpoint 库
 best_endpoint() {
-  wget $STACK -qO /tmp/endpoint https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
+  wget $STACK -qO /tmp/endpointhttps://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
   [ "$IPV4$IPV6" = 01 ] && wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv6 || wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv4
 
   if [[ -e /tmp/endpoint && -e /tmp/ip ]]; then
@@ -1943,7 +1939,7 @@ install() {
       wireproxy_latest=$(wget --no-check-certificate -qO- -T1 -t1 $STACK "https://api.github.com/repos/pufferffish/wireproxy/releases/latest" | grep "tag_name" | head -n 1 | cut -d : -f2 | sed 's/[ \"v,]//g')
       wireproxy_latest=${wireproxy_latest:-'1.0.6'}
       wget --no-check-certificate -T10 -t1 $STACK -O wireproxy.tar.gz https://${CDN}github.com/pufferffish/wireproxy/releases/download/v"$wireproxy_latest"/wireproxy_linux_"$ARCHITECTURE".tar.gz ||
-      wget --no-check-certificate $STACK -O wireproxy.tar.gz https://github.com/MHCloner/rhazefafewa/releases/download/0.0.1/wireproxy_linux_amd64.tar.gz
+      wget --no-check-certificate $STACK -O wireproxy.tar.gz https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/wireproxy_linux_"$ARCHITECTURE".tar.gz
       [ $(type -p tar) ] || ${PACKAGE_INSTALL[int]} tar 2>/dev/null || ( ${PACKAGE_UPDATE[int]}; ${PACKAGE_INSTALL[int]} tar 2>/dev/null )
       tar xzf wireproxy.tar.gz -C /usr/bin/; rm -f wireproxy.tar.gz
     fi
@@ -2109,7 +2105,7 @@ EOF
 
       # CentOS Stream 9 需要安装 resolvconf
       [[ "$SYSTEM" = CentOS && "$(expr "$SYS" : '.*\s\([0-9]\{1,\}\)\.*')" = 9 ]] && [ ! $(type -p resolvconf) ] &&
-      wget $STACK -P /usr/sbin https://${CDN}github.com/fscarmen/warp/releases/download/resolvconf/resolvconf && chmod +x /usr/sbin/resolvconf
+      wget $STACK -P /usr/sbin https://github.com/fscarmen/warp/releases/download/resolvconf/resolvconf && chmod +x /usr/sbin/resolvconf
       ;;
 
     Alpine )
@@ -2740,12 +2736,12 @@ change_to_plus() {
     bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
 
     # 流程4:使用 License 升级账户
-    local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE)
+    local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE)
 
     # 流程5:如成功，根据新账户信息修改配置文件并注销旧账户; 如失败则还原为原账户
     # 如升级成功的处理: 删除原账户信息文件，注销原账户
     if grep -q '"warp_plus": true' <<< "$UPDATE_RESULT"; then
-      [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+      [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
       cancel_account /etc/wireguard/warp-account.conf.bak
       backup_restore_delete delete
       local PRIVATEKEY="$(grep 'private_key' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
