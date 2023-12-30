@@ -399,7 +399,8 @@ error() { echo -e "\033[31m\033[01m$*\033[0m" && exit 1; }  # 红色
 info() { echo -e "\033[32m\033[01m$*\033[0m"; }   # 绿色
 hint() { echo -e "\033[33m\033[01m$*\033[0m"; }   # 黄色
 reading() { read -rp "$(info "$1")" "$2"; }
-text() { grep -q '\$' <<< "${E[$*]}" && eval echo "\$(eval echo "\${${L}[$*]}")" || eval echo "\${${L}[$*]}"; }
+text() { grep -q '\$' <<< "${E[$*]}" && eval echo "\$(eval echo \"\${${L}[$*]}\")" || eval echo "\${${L}[$*]}"; }
+
 
 # 自定义谷歌翻译函数
 translate() {
@@ -464,7 +465,7 @@ check_operating_system() {
   elif [ -s /etc/redhat-release ]; then
     SYS="$(grep . /etc/redhat-release)"
   elif [ -s /etc/issue ]; then
-    SYS="$(grep . /etc/issue | cut -d '\' -f1 | sed '/^[ ]*$/d')"
+    SYS="$(grep . /etc/issue | cut -d '\\' -f1 | sed '/^[ ]*$/d')"
   fi
 
   # 自定义 Alpine 系统若干函数
@@ -519,7 +520,7 @@ check_dependencies() {
 cancel_account(){
   local FILE=$1
   if [ -s "$FILE" ]; then
-    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' $FILE || bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --cancle --file $FILE >/dev/null 2>&1
+    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' "$FILE" || bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --cancle --file "$FILE" >/dev/null 2>&1
   fi
 }
 
